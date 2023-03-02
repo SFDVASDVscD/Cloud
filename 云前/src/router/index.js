@@ -1,0 +1,142 @@
+//该文件专门用于创建整个应用的路由器
+import VueRouter from "vue-router";
+//引入组件
+import UserManagement from "../views/UserManagement";
+import Home from "../components/Home";
+import Login from "../components/Login";
+import RecycleBin from "../views/RecycleBin";
+import UserInfo from '../views/UserInfo'
+import DownLoad from '../views/DownLoad'
+import UpLoad from '../views/UpLoad'
+
+const router=new VueRouter({
+  routes:[
+    {
+      path:'/',
+      //设置默认页面
+      redirect:'/login'
+    },
+    {
+      path:'/home',
+      component:Home,
+      redirect:'/home/files',
+      children:[
+        {
+          path:'files',
+          component:()=>import('../views/Files')
+        },
+        {
+          path:'audio',
+          component:()=>import('../views/Audio')
+        },
+        {
+          path:'photos',
+          component:()=>import('../views/Photos')
+        },
+        {
+          path:'videos',
+          component:()=>import('../views/Videos')
+        },
+        {
+          path:'zipfile',
+          component:()=>import('../views/ZipFile')
+        },
+        {
+          path:'recyclebin',
+          component:RecycleBin
+        },
+        {
+          path:'download',
+          component:DownLoad
+        },
+        {
+          path:'upload',
+          component:UpLoad
+        },
+        {
+          path:'userinfo',
+          component:UserInfo
+        },
+        {
+          path:'recentlybrowse',
+          component:()=>import('../views/RecentlyBrowse')
+        },
+      ]
+    },
+    {
+      path:'/login',
+      component:Login,
+      redirect:'/login/signin',
+      children:[
+        {
+          path:'signin',
+          component:()=>import('../views/SignIn')
+        },
+        {
+          path:'register',
+          component:()=>import('../views/Register')
+        },
+        {
+          path:'managelogin',
+          component:()=>import('../views/ManageLogin')
+        },
+      ]
+    },
+    {
+      path:'/repassword',
+      component:()=>import('../views/Repassword')
+    },
+    {
+      path:'/managehome',
+      component:()=>import("../components/ManageHome"),
+      redirect:'/managehome/management',
+      children:[
+        {
+          path:'manageinfo',
+          component:()=>import('../views/ManageInfo')
+        },
+        {
+          path:'management',
+          component:()=>import('../views/management')
+        },
+        {
+          path:'manageuser',
+          component:()=>import('../views/ManageUser')
+        },
+        {
+          path:'managefile',
+          component:()=>import('../views/ManageFile')
+        },
+      ]
+    },
+    {
+      path:'/mycenter',
+      component:()=>import('../components/MyCenter'),
+      children:[
+        {
+          path:'centerchange',
+          component:()=>import('../views/CenterChange')
+        },
+        {
+          path:'centeremail',
+          component:()=>import('../views/CenterEmail')
+        },
+        {
+          path:'centerinfo',
+          component:()=>import('../views/Centerinfo')
+        },
+      ]
+    },
+    {
+      path:'/showshare',
+      component:()=>import('../components/ShowShare')
+    },
+    {
+      path:'/uploadfiles',
+      component:()=>import("../views/UpLoadFiles")
+    },
+  ]
+})
+
+//暴露路由器
+export default router
