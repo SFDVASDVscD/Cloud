@@ -1,0 +1,62 @@
+server:
+  port: 80
+
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" #跨域处理 允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/cloud?serverTimezone=UTC
+      username: root
+      password: yanglanxin1210
+#        10276675ddd
+  mail:
+    host: smtp.qq.com
+    username: 2873048700@qq.com
+    password: scexdzwtttehdehh
+  redis:
+    host: localhost
+    port: 6379
+  cache:
+    redis:
+      time-to-live: 1800000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 5000MB
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: assign_id
+  configuration:
+    #打印sql日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #驼峰功能
+    map-underscore-to-camel-case: true
+
+sa-token:
+  is-log: true
+  timeout: 2592000
+  token-style: simple-uuid
+  token-name: token
+  is-share: true
+  is-concurrent: false
+
+cloud:
+  uploadpath: C:\cloud\upload\
+  downloadPath: C:\cloud\download\
